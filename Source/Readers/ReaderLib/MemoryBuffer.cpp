@@ -54,6 +54,7 @@ namespace Microsoft { namespace MSR { namespace CNTK {
                     m_data.clear();
                 }
 
+                m_current = m_data.data();
                 m_lastPartialLineInBuffer.clear();
                 return;
             }
