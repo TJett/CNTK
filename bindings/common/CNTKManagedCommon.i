@@ -28,7 +28,7 @@
 //and then write custom method in the language specific file
 %define MAKE_GETTER(namespace, method)
     %rename
-    #ifdef SWIGCSHARP
+    #if defined(SWIGCSHARP)
     (Get ## method)
     #else
     (get ## method)
@@ -37,7 +37,7 @@
 %enddef
 
 %define MODIFY_PRIVATE(namespace, method)
-    #ifdef SWIGCSHARP
+    #if defined(SWIGCSHARP)
     %csmethodmodifiers
     #else
     %javamethodmodifiers
@@ -408,7 +408,7 @@ SWIG_STD_VECTOR_ENHANCED(CNTK::DeviceDescriptor)
 %include "CNTKExceptionHandling.i"
 
 // class DeviceDescriptor
-MAKE_GETTER(CNTK::DeviceDescriptor, Type);
+MODIFY_PRIVATE(CNTK::DeviceDescriptor, Type);
 MAKE_GETTER(CNTK::DeviceDescriptor, Id);
 MAKE_GETTER(CNTK::DeviceDescriptor, CPUDevice);
 MODIFY_PRIVATE(CNTK::DeviceDescriptor, AllDevices);
@@ -456,11 +456,11 @@ MODIFY_PRIVATE(CNTK::Function, FindAllWithName);
 MODIFY_PRIVATE(CNTK::Function, IsComposite);
 MODIFY_PRIVATE(CNTK::Function, IsPrimitive);
 MODIFY_PRIVATE(CNTK::Function, IsBlock);
+MODIFY_PRIVATE(CNTK::Function, Clone);
 
 #ifdef SWIGJAVA
 %rename (load) CNTK::Function::Load;
 %rename (combine) CNTK::Function::Combine;
-%rename (clone) CNTK::Function::Clone;
 %rename (evaluate) CNTK::Function::Evaluate;
 %rename (setName) CNTK::Function::SetName;
 %rename (findByName) CNTK::Function::FindByName;
@@ -555,11 +555,12 @@ MAKE_GETTER(CNTK::NDShape, TotalSize);
 MODIFY_PRIVATE(CNTK::NDShape, Dimensions);
 MODIFY_PRIVATE(CNTK::NDShape, IsUnknown);
 %rename (AreEqualShape) CNTK::operator==(const NDShape& first, const NDShape& second);
+MODIFY_PRIVATE(CNTK::NDShape, HasInferredDimension);
+MODIFY_PRIVATE(CNTK::NDShape, HasFreeDimension);
+
 
 #ifdef SWIGJAVA
 %rename (hasUnboundDimension) CNTK::NDShape::HasUnboundDimension;
-%rename (hasInferredDimension) CNTK::NDShape::HasInferredDimension;
-%rename (hasFreeDimension) CNTK::NDShape::HasFreeDimension;
 %rename (appendShape) CNTK::NDShape::AppendShape;
 %rename (alias) CNTK::NDShape::Alias;
 %rename (copyFrom) CNTK::NDShape::CopyFrom;

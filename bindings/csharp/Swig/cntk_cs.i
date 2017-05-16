@@ -11,17 +11,17 @@
 %typemap(cscode) CNTK::DeviceDescriptor %{
     public int Id
     {
-        get { return (int)_Id(); }
+        get { return (int)GetId(); }
     }
 
     public DeviceKind Type
     {
-        get { return _DeviceType(); }
+        get { return _Type(); }
     }
 
     public static DeviceDescriptor CPUDevice
     {
-        get { return _CPUDevice(); }
+        get { return GetCPUDevice(); }
     }
 
     public static DeviceDescriptor GPUDevice(int deviceId)
@@ -76,7 +76,7 @@
 
     public override int GetHashCode()
     {
-        return this._DeviceType().GetHashCode();
+        return this._Type().GetHashCode();
     }
 
     public static void SetExcludedDevices(System.Collections.Generic.IEnumerable<DeviceDescriptor> excluded)
@@ -96,7 +96,7 @@
     {
         get 
         {
-            return _Name();
+            return GetName();
         }
     }
 
@@ -159,11 +159,11 @@
     {
         if (this.IsDynamicAxis())
         {
-            return this._Name().GetHashCode();
+            return this.GetName().GetHashCode();
         }
         else
         {
-            return this.StaticAxisIndex().GetHashCode();
+            return this.GetStaticAxisIndex().GetHashCode();
         }
     }
 %}
@@ -178,7 +178,7 @@
     {
         get 
         {
-            return _Name();
+            return GetName();
         }
     }
 
@@ -186,13 +186,13 @@
     {
         get 
         {
-            return _Uid();
+            return GetUid();
         }
     }
 
     public Function RootFunction
     {
-        get { return _RootFunction(); }
+        get { return GetRootFunction(); }
     }
 
     public System.Collections.Generic.IList<Variable> Outputs
@@ -209,12 +209,12 @@
 
     public Variable Output
     {
-        get { return _Output(); }
+        get { return GetOutput(); }
     }
 
     public string OpName
     {
-        get { return _OpName(); }
+        get { return GetOpName(); }
     }
 
     public bool IsComposite
@@ -334,17 +334,17 @@
 %typemap(cscode) CNTK::Variable %{
     public NDShape Shape
     {
-        get { return _Shape(); }
+        get { return GetShape(); }
     }
 
     public string Name
     {
-        get { return _Name(); }
+        get { return GetName(); }
     }
 
     public VariableKind Kind
     {
-        get { return _VariableKind(); }
+        get { return GetKind(); }
     }
 
     public DataType DataType
@@ -396,7 +396,7 @@
 
     public Function Owner
     {
-        get { return _Owner(); }
+        get { return GetOwner(); }
     }
 
     public override bool Equals(System.Object obj)
@@ -456,7 +456,7 @@
 
     public int Rank
     {
-        get { return (int)_Rank(); }
+        get { return (int)GetRank(); }
     }
 
     public System.Collections.Generic.IList<int> Dimensions
@@ -490,7 +490,7 @@
 
     public int TotalSize
     {
-        get { return (int)_TotalSize(); }
+        get { return (int)GetTotalSize(); }
     }
 
     public int this[int key]
@@ -588,15 +588,15 @@
     }
 
     public int MaskedCount {
-        get { return (int)_MaskedCount(); }
+        get { return (int)GetMaskedCount(); }
     }
 
     public DeviceDescriptor Device {
-        get { return _Device(); }
+        get { return GetDevice(); }
     }
 
     public NDShape Shape {
-        get { return _Shape(); }
+        get { return GetShape(); }
     }
 
     private static SizeTVector AsSizeTVector(System.Collections.Generic.IEnumerable<int> input)
@@ -619,7 +619,7 @@
     {
         get
         {
-            return _Device();
+            return GetDevice();
         }
     }
 
@@ -643,7 +643,7 @@
     {
         get
         {
-            return _Shape();
+            return GetShape();
         }
     }
 
@@ -1252,7 +1252,7 @@
     {
         get
         {
-            return _Device();
+            return GetDevice();
         }
     }
 
@@ -1268,7 +1268,7 @@
     {
         get
         {
-            return _Shape();
+            return GetShape();
         }
     }
 

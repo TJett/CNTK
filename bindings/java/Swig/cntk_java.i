@@ -59,7 +59,7 @@
 
     @Override
     public int hashCode() {
-        return getType().hashCode();
+        return _Type().hashCode();
     }
 %}
 
