@@ -30,6 +30,10 @@
 
 // Java specific extention.
 %typemap(javacode) CNTK::DeviceDescriptor %{
+    public DeviceKind getType() {
+        return _Type();
+    }
+
     public java.util.List<DeviceDescriptor> getAllDevices() {
         DeviceDescriptorVector devices = _AllDevices();
         java.util.ArrayList<DeviceDescriptor> ret = new java.util.ArrayList<DeviceDescriptor>((int)devices.size());
@@ -164,6 +168,10 @@
         }
         return CNTKLib.Combine(varVect);
     }
+
+    public Function clone(VariableVector x) {
+        return _Clone(x);
+    }
 %}
 
 %typemap(javacode) CNTK::Variable %{
@@ -220,6 +228,14 @@
 
     public boolean isUnknown() {
         return _IsUnknown();
+    }
+
+    public boolean hasInferredDimension() {
+        return _HasInferredDimension();
+    }
+
+    public boolean hasFreeDimension() {
+        return _HasFreeDimension();
     }
 
     public java.util.ArrayList<Long> getDimensions(){
